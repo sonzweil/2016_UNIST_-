@@ -1,5 +1,5 @@
 % Q3)
-function test_myran()
+function f = test_myran(N)
 
 N = 1000; % generate 1,000 random numbers
 data = myran(N); % from your ¡°myran.m¡± and store them in the memory
@@ -7,13 +7,14 @@ data = myran(N); % from your ¡°myran.m¡± and store them in the memory
 bin_width = 0.1; % The size of the bin is set to be 0.1
 nbins = 1 / bin_width; % Then, the number of bins becomes this value;
 xRange = 0:bin_width:1; % Divide xRange with bin_width from 0 to 1.
-N = hist(data, xRange); % hist returns a row vector containing the number of elements in each bin.
+counts = hist(data, xRange); % hist returns a row vector containing the number of elements in each bin.
 
 % draw probability density function. 
 % To do not change probability, 
 % y value should not be 'N./numel(data)', but be 'N.*nbins./numel(data)'. 
 % This operation maintains probability density value.
-plot(xRange, N.*nbins./numel(data));
+f = counts.*nbins./numel(data);
+plot(xRange, f);
 
 % Q) Does it look uniform distribution to you?
 % A) Yes, it looks uniform distribution to me.
@@ -24,11 +25,15 @@ plot(xRange, N.*nbins./numel(data));
 % Q) If it doesn¡¯t, why?
 % A) Because myran() generates (0 1) which doesn't include 0 and 1.
 
+
+
 % Q4)
 % Generate 100,000 random numbers this time. How does your graph look like this time? More uniform or not?
 % I set N = 100000. And I answered questions.
 % Q) How does your graph look like this time? More uniform or not?
 % A) It looks more uniform.
+
+
 
 % Q5)
 % Change the bin size from 0.1 to 0.02 for your graph for the case of 3 and 4.
