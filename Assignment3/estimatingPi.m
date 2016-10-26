@@ -44,7 +44,10 @@ while N <= 10000
     % showing results
     disp(['N : ', num2str(N), ',', ' pi : ', num2str(estimate)])
     
-    N = N + 1000; % increase N by 1000 for the next number of points
+    % initialize and increase N by 1000 for the next number of points
+    index = 1; 
+    Nzero = 0; 
+    N = N + 1000;
 end
 
 end
