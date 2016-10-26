@@ -4,7 +4,7 @@ function estimatingPi()
 % Then we calculate how many of those points landed inside the unit circle.
 
 %% (1) Express ¥ð as a function of No and N.
-% Ans) =(Nzero/N)*A=(Nzero/N)*4
+% Ans) ¥ð = (Nzero / N) * A = (Nzero / N) * 4
 % Nzero is the number of points landed inside the unit circle
 % N is the number of points
 % A is the area of square x ¡ô [-1, 1] and y ¡ô [-1, 1]
