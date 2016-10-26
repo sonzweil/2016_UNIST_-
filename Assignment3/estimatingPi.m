@@ -9,8 +9,7 @@ function estimatingPi()
 % N is the number of points
 % A is the area of square x ¡ô [-1, 1] and y ¡ô [-1, 1]
 
-%% (2)Show the figure of the distribution of 1000 random points inside the
-% square circle geometry (exemplary figure is given below)
+%% (2)Show the figure of the distribution of 1000 random points inside the square circle geometry (exemplary figure is given below)
 A = 4; 
 index = 1;
 Nzero = 0;
