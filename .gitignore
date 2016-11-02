@@ -23,9 +23,7 @@ slprj/
 octave-workspace
 
 
-
-
 # user defined
-.txt
-.pdf
-.vtk
+*.txt
+*.pdf
+*.vtk
