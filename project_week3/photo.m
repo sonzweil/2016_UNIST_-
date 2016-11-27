@@ -1,23 +1,8 @@
-function read_write_micro_vtk()
+function photo()
+%UNTITLED3 이 함수의 요약 설명 위치
+%   자세한 설명 위치
+write_micro_vtk;
 
-    function data = read_micro_vtk()
-        data = zeros(1000, 10);
-        readFile = fopen('test_micro.vtk','r');
-        for index = 1:215
-            str = fgets(readFile);
-        end
-        
-        for i = 1:1000
-            str = fgets(readFile);
-            curData = sscanf(str,'%d %d %d %d %d %d %d %d %d %d');
-            
-            for j = 1:10
-                data(i, j) = curData(j, 1);
-            end
-        end
-        
-        data
-    end
 
     function write_micro_vtk()
         data = zeros(1000, 10);
@@ -41,6 +26,9 @@ function read_write_micro_vtk()
             fprintf(writeFile, '\n');
         end
         
+        fclose(writeFile);
+        
     end
 
 end
+
