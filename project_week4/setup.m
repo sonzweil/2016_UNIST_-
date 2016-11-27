@@ -1,5 +1,7 @@
 function result = setup()
 
+inputdat;
+
 global siteSpin
 global areafrac
 global resume

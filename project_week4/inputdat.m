@@ -44,5 +44,5 @@ global numberOfResume
     numberOfResume = 10000;
    
 global maxMCS
-maxMCS = 1
+maxMCS = 1;
 end

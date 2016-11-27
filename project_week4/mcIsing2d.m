@@ -2,7 +2,6 @@ function mcIsing2d()
 % the main function which contains the Monte Carlo algorithm for Ising model
 
 % 1) read or prepare initial microstructure using functions in ¡°setup.m¡±
-inputdat;
 setup
 
 % 2) do Monte Carlo simulation by calling the function, ¡°sweep_Ising()¡±, prepared in
