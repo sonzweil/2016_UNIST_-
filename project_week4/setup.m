@@ -85,6 +85,11 @@ setup_init_micro();
             result = 1;
         end
     end
+
+    function prepare_initmicro_a_circle()
+        
+    end
+
 end
 
 

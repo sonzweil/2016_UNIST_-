@@ -42,7 +42,15 @@ global infname % stores the name of input microstructure file name
     infname = 'test_micro.vtk';
 global numberOfResume 
     numberOfResume = 10000;
-   
+
+% for evolution.m
 global maxMCS
 maxMCS = 1;
+
+global kT
+kT = 1;
+
+global J
+J = 1;
+
 end
