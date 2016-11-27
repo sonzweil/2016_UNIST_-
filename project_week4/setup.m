@@ -1,4 +1,4 @@
-function result = setup()
+function setup()
 
 inputdat;
 
@@ -10,7 +10,7 @@ global numberOfResume
 global nsp
 
 curfrac = 0;
-result = setup_init_micro();
+setup_init_micro();
 
 
 % 1) it reads micro vtk file as input file, or
@@ -18,9 +18,9 @@ result = setup_init_micro();
 
 
 %%%% resume 관련 업데이트 필요
-    function data = setup_init_micro()
-
-        data = read_micro_vtk(infname);
+    function setup_init_micro()
+        
+        read_micro_vtk(infname);
         
         while areafrac ~= curfrac
             endOfrow = ceil(numberOfResume / 10);
@@ -55,8 +55,6 @@ result = setup_init_micro();
                 end
             end
             curfrac = curNumOfMinusOne/nsp;
-            
-            curfrac
         end
     end
 
@@ -87,9 +85,6 @@ result = setup_init_micro();
             result = 1;
         end
     end
-
-    curfrac
-
 end
 
 
