@@ -1,9 +1,12 @@
-function [ output_args ] = evolution( input_args )
-% sweep ising tool(pixel개수(xdim*ydim)만큼 뭔가 추가하는 function
+function evolution()
+
 global siteSpin
 global J
 global kT
-global maxMCS
+global nsp
+global xdim
+global ydim
+ 
 sweep_ising();
 
     function sweep_ising()
@@ -11,14 +14,14 @@ sweep_ising();
         % Then, by calling sweep_Ising() in the main function, the simulation time of 1 MCS elapses.
         % While calling sweep_Ising(), write out the microstructures at the prescribed time interval.
         
-        while i = 1:maxMCS
+        for i = 1:nsp
             % 1) select a random site,
             [row, col] = size(siteSpin);
-            randRow = qRan(row);
-            randCol = qRan(col);
+            randRow = random(row);
+            randCol = random(col);
             
             % 2) using the spin values of the currently selected site and its neighboring sites, calculate energy of the state (i.e., old state),
-            Ezero = calculateEnergyState(randRow, randCol)
+            Ezero = calculateEnergyState(randRow, randCol);
             
             % 3) select a random spin from possible spin states, for the randomly selected site,
             randomSpin = randPlusMinusOne();
@@ -26,7 +29,7 @@ sweep_ising();
             siteSpin(randRow, randCol) = randomSpin;
             
             % 4) using the new spin, calculate the energy of the state (i.e., new state),
-            E = calculateEnergyState(randRow, randCol)
+            E = calculateEnergyState(randRow, randCol);
             
             % 5) calculate energy change, delta E, between new and old state by changing the spin state of the randomly selected site,
             deltaE = E - Ezero;
@@ -37,7 +40,7 @@ sweep_ising();
                 continue;
             end
             
-            % If ΔE > 0, calculate w = exp(?ΔE/kT).
+            % If ΔE > 0, calculate w = exp(-ΔE/kT).
             % Then, generate a uniform random number r∈[0, 1].
             w = exp(-deltaE/kT);
             r = rand();
@@ -49,7 +52,7 @@ sweep_ising();
             
             % If r > w, reject the change and restore the old spin for the site i.
             siteSpin(randRow, randCol) = previousSpin;
-
+            
             % 7) once each trial is done, the control is sent back to the top for another trial…
         end
         
@@ -58,27 +61,21 @@ sweep_ising();
 
     function energyState = calculateEnergyState(randRow, randCol)
         energyState = 0;
-        [row, col] = size(siteSpin);
-        zeroBoundarySiteSpin = zeros(row + 2, col + 2);
-        
-        for i=1:row
-            for j=1:col
-                zeroBoundarySiteSpin(i+1, j+1) = siteSpin(i, j);
-            end
-        end
         
         for i=randRow-1:randRow+1
             for j=randCol-1:randCol+1
-                if randRow == i && randCol == j
+                if (i == randRow) && (j == randCol)
                     continue;
                 end
-                energyState = energyState + zeroBoundarySiteSpin(randRow + 1, randCol + 1) * zeroBoundarySiteSpin(i + 1, j + 1);
+                
+                row = getRowIndex(i);
+                col = getColIndex(j);
+                energyState = energyState + siteSpin(randRow, randCol) * siteSpin(row, col);
             end
         end
         
-        energyState = -J * energyState;
         
-        % energyState = zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row - 1, col - 1) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row - 1, col) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row - 1, col + 1) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row, col - 1) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row, col + 1) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row + 1, col - 1) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row + 1, col) + zeroBoundarySiteSpin(row, col) * zeroBoundarySiteSpin(row + 1, col + 1);
+        energyState = -J * energyState;
     end
 
     function result = randPlusMinusOne()
@@ -86,6 +83,26 @@ sweep_ising();
             result = -1;
         else
             result = 1;
+        end
+    end
+
+    function rowIndex = getRowIndex(i)
+        if (i < 1)
+            rowIndex = ydim;
+        elseif (i > ydim)
+            rowIndex = 1;
+        else
+            rowIndex = i;
+        end
+    end
+
+    function colIndex = getColIndex(j)
+        if (j < 1)
+            colIndex = xdim;
+        elseif (j > xdim)
+            colIndex = 1;
+        else
+            colIndex = j;
         end
     end
 end

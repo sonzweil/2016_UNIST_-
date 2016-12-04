@@ -3,7 +3,7 @@ function inputdat()
 % nNeighbor = number of interacting nearest neighbor. For 2d square grid, it's 8
 global nNeighbor
     nNeighbor=8;
-% xdim, ydim, zdim = number of pixels in x, y and z directions. They must be the same in an input microstructure, if any. For 2d simulation, zdim = 1 but this is only for outputting vtk images...
+% xdim, ydim, zdim = number of pixels in x, y and z directions. They must be the same in an input microstructure, if any.
 global xdim
     xdim=100;
 global ydim
@@ -31,25 +31,27 @@ global dz
 % set up the global variable called ¡°siteSpin¡±.
 % siteSpin = array that stores spin value of each pixel¡¦
 global siteSpin
-siteSpin = zeros(1000, 10);
+siteSpin = zeros(ydim, xdim);
 
 % for setup.m 
 global areafrac % controlling parameters which specify area fraction of -1 spin
-    areafrac = 0.1;
+    areafrac = 0.8;
 global resume % the function to select one of the options or initial configurationf
-    resume = true;
+    resume = 3;
 global infname % stores the name of input microstructure file name
     infname = 'test_micro.vtk';
-global numberOfResume 
-    numberOfResume = 10000;
+
+% for mcIsing2d.m
+global maxMCS
+maxMCS = 250;
+global curMCS
+curMCS;
+global photoMCSInterval
+photoMCSInterval = 25;
 
 % for evolution.m
-global maxMCS
-maxMCS = 1;
-
 global kT
 kT = 1;
-
 global J
 J = 1;
 

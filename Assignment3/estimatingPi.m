@@ -15,7 +15,7 @@ index = 1;
 Nzero = 0;
 N = 1000;
 x = -1 + (1+1)*rand(N,1);
-y = -1 + (1+1)*rand(N,1);
+y = -1 + (1+1)*rand(N ,1);
 
 hold on
 t = 0 : (pi / 50) : (2 * pi);
